@@ -1,4 +1,4 @@
-# Music Streamer
+# Music Learning System
 
 This project is a digital music platform, It's made for listening to music and making your favorite music collection. Spotify API is used to get tracks and albums, artists. Spotify API provides millions of music data. This project is made in the MERN stack.
 
