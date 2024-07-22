@@ -1,0 +1,34 @@
+@import '../../index.scss';
+
+
+@keyframes upAndDown {
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.loading {
+    top: 0;
+    left: 0;
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-bg);
+
+    .dot {
+        margin: .3rem;
+        background: $PrimaryColor;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+    }
+
+    .dot-active {
+        animation: upAndDown .5s ease-in-out forwards;
+    }
+}

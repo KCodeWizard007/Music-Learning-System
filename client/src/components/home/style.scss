@@ -1,0 +1,231 @@
+@import '../../index.scss';
+
+.liteRow {
+    margin-bottom: 2rem;
+
+    .title {
+        @include rowsTitle;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(9rem, 1fr));
+        gap: 16px;
+
+        @media screen and (max-width:1060px) {
+            grid-template-columns: repeat(2, minmax(9rem, 1fr));
+        }
+
+        @media screen and (max-width:540px) {
+            grid-template-columns: auto;
+        }
+
+        .card {
+            position: relative;
+            background: var(--primary-bg);
+            padding: .5rem 0;
+            align-items: center;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            border-radius: 5px;
+
+            img {
+                @include coverImage;
+                display: flex;
+                flex-direction: column;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 5px;
+                margin-left: .5rem;
+            }
+
+            .details {
+                padding-left: 1rem;
+                width: 9rem;
+
+                @media screen and (max-width:1115px) {
+                    width: 8rem;
+                }
+
+                @media screen and (max-width:790px) {
+                    width: 7rem;
+                }
+
+                @media screen and (max-width:540px) {
+                    width: 11rem;
+                }
+
+                @media screen and (max-width:340px) {
+                    width: 7rem;
+                }
+
+
+                h5 {
+                    font-weight: 500;
+                    font-size: 14px;
+                    color: var(--text-primary-color);
+                    @include singleLine;
+                }
+
+                p {
+                    color: $TextSecondaryColor;
+                    font-size: 12px;
+                    @include singleLine;
+                }
+            }
+
+            .play {
+                position: absolute;
+                padding-left: 1rem;
+                height: 100%;
+                left: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                margin-right: .5rem;
+                opacity: 0;
+                @include transi_easy_in_out($second: .5s);
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 1.5rem;
+                    width: 1.5rem;
+                    border-radius: 50%;
+                    background: $PrimaryColor;
+                    border: none;
+                    cursor: pointer;
+                    @include transi_easy_in_out($second: .5s);
+
+                    svg {
+                        fill: var(--text-primary-color);
+                    }
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.carousel {
+    margin-bottom: 1.5rem;
+
+    .title {
+        @include rowsTitle;
+        margin-bottom: .5rem;
+    }
+
+    .inner {
+        display: grid;
+        gap: 16px;
+        grid-auto-flow: column;
+        overflow: hidden;
+        grid-auto-columns: minmax(calc((100% - 3 * 16px) / 4), 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(calc((100% - 3 * 16px) / 4), 1fr));
+
+        @include media_grid_and_carousel($max-width: 1024px, $colums: 3, $gap: 16px);
+
+        @include media_grid_and_carousel($max-width: 600px, $colums: 2, $gap: 16px);
+
+        @include media_grid_and_carousel($max-width: 300px, $colums: 1, $gap: 16px);
+
+        .card {
+            @include nonCopyContent;
+            position: relative;
+            cursor: pointer;
+
+            img {
+                @include coverImage;
+                border-radius: 5px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .hover-details {
+                background: transparent;
+                display: flex;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                flex-direction: row-reverse;
+                align-items: end;
+                justify-content: center;
+                opacity: 0;
+                @include transi_easy_in_out($second: .5s);
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                button {
+                    bottom: 1rem;
+                    position: absolute;
+                    right: .5rem;
+                    background: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 2.5rem;
+                    width: 2.5rem;
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    @include transi_easy_in_out($second: .5s);
+
+                    &:hover {
+                        transform: translateY(-5px);
+                    }
+                }
+
+                .details {
+                    bottom: 1rem;
+                    position: absolute;
+                    left: .5rem;
+                    max-width: 40%;
+                    text-align: left;
+
+                    h5 {
+                        @include singleLine;
+                        line-height: 1.875rem;
+                        font-size: 14px;
+                        color: #fff;
+                        font-weight: 600;
+                    }
+
+                    p {
+                        @include singleLine;
+                        font-size: 12px;
+                        color: $TextSecondaryColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:800px) {
+    .expand {
+        .carousel {
+            .inner {
+                grid-auto-columns: minmax(calc((100% - 4 * 16px) / 5), 1fr);
+                grid-template-columns: repeat(auto-fill, minmax(calc((100% - 4 * 16px) / 5), 1fr));
+
+                @include media_grid_and_carousel($max-width: 1024px, $colums: 4, $gap: 16px);
+            }
+        }
+    }
+}

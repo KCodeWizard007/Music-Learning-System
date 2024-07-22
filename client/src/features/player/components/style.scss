@@ -1,0 +1,257 @@
+@import '../../../index.scss';
+
+.player {
+    z-index: 1000;
+    height: 4rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: var(--content-bg);
+    border-top: 1px solid var(--primary-border);
+
+    @media screen and (max-width:700px) {
+        height: 5rem;
+    }
+
+    .inner {
+        position: relative;
+        width: auto;
+        padding: .5rem 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(calc(100% / 3), 1fr));
+        align-items: center;
+
+        audio {
+            visibility: hidden;
+        }
+
+        @media screen and (max-width:700px) {
+            grid-template-columns: repeat(auto-fill, minmax(calc(100% / 2), 1fr));
+            padding-top: 1rem;
+        }
+
+        .details {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: left;
+
+            .thumbnail img {
+                border-radius: 5px;
+                width: 3rem;
+                height: 3rem;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                object-position: center;
+                margin-right: .5rem;
+            }
+
+            .content {
+                max-width: 55%;
+                width: auto;
+                margin-right: .5rem;
+
+                h4 {
+                    width: auto;
+                    font-size: 12.5px;
+                    font-weight: 600;
+                    color: var(--text-primary-color);
+                    @include singleLine;
+                }
+
+                p {
+                    font-weight: normal;
+                    font-size: 11px;
+                    width: auto;
+                    color: $TextSecondaryColor;
+                    @include singleLine;
+                }
+            }
+
+            @media screen and (max-width: 350px) {
+                .content {
+                    width: 40%;
+                }
+            }
+        }
+
+        .audio_player {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .actions {
+                display: flex;
+                flex-direction: row;
+
+                button {
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    margin: 0 1rem;
+                    cursor: pointer;
+
+                    svg {
+                        fill: var(--text-primary-color);
+                        @include transi_easy_in_out;
+                    }
+
+                    &:hover {
+                        svg {
+                            fill: $PrimaryColor;
+                        }
+                    }
+
+                    &:is(.disable){
+                        cursor: unset;
+                        svg{
+                            fill: #888;
+                        }
+
+                        &:hover {
+                            svg {
+                                fill: #888;
+                            }
+                        }
+                    }
+                }
+
+                .prev svg {
+                    rotate: 180deg;
+                }
+            }
+
+            .seekBar {
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                justify-content: center;
+                width: 100%;
+
+                label {
+                    text-align: center;
+                    color: $TextSecondaryColor;
+                    font-size: 11px;
+                    width: 5rem;
+                }
+
+                input[type="range"] {
+                    width: 100%;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    border-radius: 9999px;
+                    height: 4px;
+                    margin-top: .4rem;
+                    background: linear-gradient(to right, $PrimaryColor 0%, $PrimaryColor 0%, #d9d9db 0%, #d9d9db 0%);
+                    @include transi_easy_in_out;
+
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        background: #FFF;
+                        border: none;
+                        border-radius: 50%;
+                        height: .5rem;
+                        width: .5rem;
+                        box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+                        cursor: pointer;
+                    }
+
+                    &::-moz-range-thumb {
+                        border: none;
+                        background: #FFF;
+                        border-radius: 50%;
+                        height: .5rem;
+                        width: .5rem;
+                        box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+                        cursor: pointer;
+                    }
+                }
+
+            }
+
+            @media screen and (max-width:700px) {
+                align-items: end;
+
+                .seekBar {
+                    width: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+
+                    input {
+                        width: 100%;
+                        margin: 0 1rem;
+                    }
+
+                    label {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .volume {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: right;
+
+            svg {
+                fill: var(--text-primary-color);
+                margin-right: .5rem;
+            }
+
+            input[type="range"] {
+                -webkit-appearance: none;
+                appearance: none;
+                border-radius: 9999px;
+                height: 4px;
+                background: linear-gradient(to right, $PrimaryColor 0%, $PrimaryColor 0%, #d9d9db 0%, #d9d9db 0%);
+                @include transi_easy_in_out;
+
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    background: #FFF;
+                    border: none;
+                    border-radius: 50%;
+                    height: .5rem;
+                    width: .5rem;
+                    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+                    cursor: pointer;
+                }
+
+                &::-moz-range-thumb {
+                    border: none;
+                    background: #FFF;
+                    border-radius: 50%;
+                    height: .5rem;
+                    width: .5rem;
+                    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+                    cursor: pointer;
+                }
+            }
+
+            @media screen and (max-width: 700px) {
+                position: absolute;
+                right: 1rem;
+                bottom: .5rem;
+
+                input {
+                    width: calc((2 * 16px) + (6 * 1rem) + 25px);
+                }
+
+                svg {
+                    display: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,140 @@
+$PrimaryColor: #09c478;
+$TextSecondaryColor: #888;
+$GreyBlack: #222;
+
+:root {
+  .light {
+    --primary-bg: #f5f5f6;
+    --text-primary-color: #{$GreyBlack};
+    --content-bg: #fff;
+    --primary-border: #f5f5f5;
+  }
+
+  .dark {
+    --primary-bg: #232427;
+    --text-primary-color: #fff;
+    --content-bg: #171719;
+    --primary-border: rgba(130, 140, 150, 0.1);
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  background: var(--content-bg);
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: var(--primary-bg);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes logoAnimation {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes modal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin rowsTitle {
+  h5 {
+    font-size: 1.17rem;
+    font-weight: 600;
+    color: var(--text-primary-color);
+  }
+
+  margin-bottom: 1rem;
+}
+
+@mixin singleLine {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+}
+
+@mixin coverImage {
+  aspect-ratio: 1/1;
+  object-position: center;
+  object-fit: cover;
+}
+
+@mixin transi_easy_in_out($second: 0.5s) {
+  transition: all $second ease-in-out;
+  -moz-transition: all $second ease-in-out;
+}
+
+@mixin expand_page($expanded: false) {
+  @if $expanded {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  @else {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+  }
+}
+
+@mixin modalConfigBg {
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  animation: modal .5s ease-in-out forwards;
+}
+
+@mixin media_grid_and_carousel($max-width: 330px, $colums: 1, $gap: 1rem) {
+  @media screen and (max-width: $max-width) {
+    grid-template-columns: repeat(auto-fill,
+        minmax(calc((100% - ($colums - 1) * $gap) / $colums), 1fr));
+
+    &:is(#carousel) {
+      grid-auto-columns: minmax(calc((100% - ($colums - 1) * $gap) / $colums),
+          1fr) !important;
+    }
+  }
+}
+
+@mixin nonCopyContent {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#root {
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}

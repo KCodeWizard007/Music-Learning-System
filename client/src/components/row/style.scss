@@ -1,0 +1,148 @@
+@import "../../index.scss";
+
+div[data-for="Row"] {
+  margin-bottom: 2rem;
+
+  .title {
+    @include rowsTitle;
+  }
+
+  .grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill,
+        minmax(calc((100% - 4 * 16px) / 5), 1fr));
+
+    &:is(#carousel) {
+      grid-auto-flow: column;
+      overflow: hidden;
+      grid-auto-columns: minmax(calc((100% - 4 * 16px) / 5), 1fr);
+    }
+
+    @include media_grid_and_carousel($max-width: 1180px, $colums: 4, $gap: 16px);
+
+    @include media_grid_and_carousel($max-width: 1000px, $colums: 3, $gap: 16px);
+
+    @include media_grid_and_carousel($max-width: 540px, $colums: 2, $gap: 16px);
+
+    @include media_grid_and_carousel($max-width: 330px, $colums: 1, $gap: 16px);
+
+    .card {
+      @include nonCopyContent;
+      border-radius: 5px;
+      cursor: pointer;
+      background: var(--primary-bg);
+      position: relative;
+      padding: 1rem;
+
+      .thumbnail {
+        position: relative;
+        width: auto;
+        height: auto;
+
+        img {
+          @include coverImage;
+          border-radius: 5px;
+          width: 100%;
+          height: auto;
+        }
+
+        svg {
+          @include coverImage;
+          border-radius: 5px;
+          width: 100%;
+          height: auto;
+          fill: var(--text-primary-color);
+        }
+
+        .rounded {
+          border-radius: 50%;
+        }
+      }
+
+      .details {
+        h5 {
+          @include singleLine;
+          line-height: 1.875rem;
+          font-size: 14px;
+          color: var(--text-primary-color);
+          font-weight: 500;
+        }
+
+        p {
+          @include singleLine;
+          font-size: 12px;
+          color: $TextSecondaryColor;
+        }
+      }
+
+      .on_hover {
+        border-radius: 5px;
+        display: flex;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        @include transi_easy_in_out($second: 0.5s);
+
+        &:hover {
+          opacity: 1;
+        }
+
+        button[data-for="play"] {
+          position: absolute;
+          right: 1.5rem;
+          bottom: calc(1rem + 14px + 12px + 1.875rem + 5px);
+          background: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 2.5rem;
+          width: 2.5rem;
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          @include transi_easy_in_out($second: 0.5s);
+
+          &:hover {
+            transform: translateY(-5px);
+          }
+        }
+
+        button[data-for="libray_options"] {
+          position: absolute;
+          border: none;
+          background: none;
+          top: 1.3rem;
+          right: 1.3rem;
+          cursor: pointer;
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .expand {
+    div[data-for="Row"] .grid {
+      grid-template-columns: repeat(auto-fill,
+          minmax(calc((100% - 5 * 16px) / 6), 1fr));
+
+      &:is(#carousel) {
+        grid-auto-columns: minmax(calc((100% - 5 * 16px) / 6), 1fr) !important;
+      }
+
+      @include media_grid_and_carousel($max-width: 1180px, $colums: 5, $gap: 16px);
+
+      @include media_grid_and_carousel($max-width: 1000px, $colums: 4, $gap: 16px);
+    }
+  }
+}
